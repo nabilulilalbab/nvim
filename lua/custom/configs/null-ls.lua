@@ -7,9 +7,17 @@ local sources = {
   -- webdev stuff
   b.formatting.prettier.with {
     filetypes = {
-      "html", "markdown", "css",
-      "javascript", "typescript", "javascriptreact", "typescriptreact"
-    }
+      "html",
+      "markdown",
+      "css",
+      "javascript",
+      "typescript",
+      "javascriptreact",
+      "typescriptreact",
+    },
+  },
+  b.formatting.djlint.with {
+    filetypes = { "htmldjango" }, -- pastikan filetype-nya tepat
   },
 
   -- Lua
@@ -25,7 +33,7 @@ local sources = {
 }
 
 local on_attach = function(client, bufnr)
-  if client.supports_method("textDocument/formatting") then
+  if client.supports_method "textDocument/formatting" then
     vim.api.nvim_clear_autocmds {
       group = augroup,
       buffer = bufnr,
@@ -45,4 +53,3 @@ null_ls.setup {
   sources = sources,
   on_attach = on_attach,
 }
-

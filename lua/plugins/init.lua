@@ -262,6 +262,82 @@ local default_plugins = {
       require("which-key").setup(opts)
     end,
   },
+  { "nvchad/volt", lazy = true },
+  {
+    "nvchad/minty",
+    lazy = true,
+    config = function()
+      require "plugins.configs.minty"
+    end,
+  },
+
+  { "nvchad/menu", lazy = true },
+
+  { "nvchad/showkeys", cmd = "ShowkeysToggle", opts = { position = "top-center" } },
+  --
+  -- { "nvchad/timerly", cmd = "TimerlyToggle" },
+  { "nvzone/timerly", cmd = "TimerlyToggle" },
+  {
+    "wakatime/vim-wakatime",
+    lazy = false,
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    ---@module "ibl"
+    ---@type ibl.config
+    opts = {},
+    enabled = false,
+  },
+  {
+    "shellRaining/hlchunk.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require "plugins.configs.chunk"
+      --
+    end,
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    ---@module "ibl"
+    ---@type ibl.config
+    opts = {},
+    enabled = false,
+  },
+  {
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy",
+    config = function()
+      require "plugins.configs.inline-diagnostics"
+    end,
+  },
+
+  {
+    "IogaMaster/neocord",
+    event = "VeryLazy",
+    config = function()
+      require "plugins.configs.discord"
+    end,
+  },
+  {
+    "linux-cultist/venv-selector.nvim",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "mfussenegger/nvim-dap",
+      "mfussenegger/nvim-dap-python", --optional
+      { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
+    },
+    lazy = false,
+    branch = "regexp", -- This is the regexp branch, use this for the new version
+    keys = {
+      { ",v", "<cmd>VenvSelect<cr>" },
+    },
+    ---@type venv-selector.Config
+    opts = {
+      -- Your settings go here
+    },
+  },
 }
 
 local config = require("core.utils").load_config()
